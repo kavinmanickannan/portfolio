@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kavin Manickannan | Operations Engineer & Aspiring SRE</title>
+  <meta name="description" content="Portfolio of Kavin Manickannan — Production Support & Operations Engineer with 8 years of experience in observability, incident management, and platform reliability at Accenture." />
+  <meta name="keywords" content="Kavin Manickannan, SRE, Site Reliability Engineer, Production Support, Observability, Dynatrace, Splunk, Incident Management" />
+  <meta name="author" content="Kavin Manickannan" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%23020818%22/><text x=%2250%22 y=%2266%22 font-family=%22monospace%22 font-size=%2244%22 font-weight=%22700%22 fill=%22%2300d4ff%22 text-anchor=%22middle%22>KM</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════
+       CURSOR GLOW
+  ═══════════════════════════════════════════════ -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- ═══════════════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo" id="navLogo">
+        <span class="logo-bracket">[</span>KM<span class="logo-bracket">]</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta" id="navCta">Hire Me</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════
+       HERO SECTION
+  ═══════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="scanlines"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">Available for SRE Opportunities</span>
+      </div>
+      <p class="hero-sub-label">PRODUCTION SUPPORT &amp; OPERATIONS ENGINEER</p>
+      <h1 class="hero-name" id="heroName">
+        <span class="glitch" data-text="KAVIN">KAVIN</span>
+        <span class="glitch hero-name-last" data-text="MANICKANNAN">MANICKANNAN</span>
+      </h1>
+      <div class="hero-typing-wrapper">
+        <span class="typing-prefix">&gt;&gt;</span>
+        <span class="hero-typing" id="heroTyping"></span>
+        <span class="typing-cursor">_</span>
+      </div>
+      <p class="hero-desc">
+        8 years of keeping production systems alive at scale.<br/>
+        Banking · E-Commerce · Hospitality · Now levelling up to SRE.
+      </p>
+      <div class="hero-actions">
+        <a href="#experience" class="btn btn-primary" id="heroExploreBtn">
+          <span>Explore My Work</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-outline" id="heroContactBtn">
+          <span>Get In Touch</span>
+        </a>
+        <a href="https://github.com/kavinmanickannan" target="_blank" rel="noopener noreferrer" class="btn btn-outline" id="heroGithubBtn">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="stat-num" data-target="8">0</span><span class="stat-unit">+</span>
+          <span class="stat-label">Years Exp.</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="stat-num" data-target="3">0</span><span class="stat-unit"></span>
+          <span class="stat-label">Industries</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="stat-num" data-target="4">0</span><span class="stat-unit">+</span>
+          <span class="stat-label">APM Tools</span>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat">
+          <span class="stat-num" data-target="0">0</span><span class="stat-unit">%</span>
+          <span class="stat-label">Unplanned Downtime</span>
+        </div>
+      </div>
+    </div>
+    <a href="#about" class="scroll-indicator" id="scrollIndicator" aria-label="Scroll down">
+      <span class="scroll-text">SCROLL</span>
+      <div class="scroll-wheel">
+        <div class="scroll-dot"></div>
+      </div>
+    </a>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       ABOUT SECTION
+  ═══════════════════════════════════════════════ -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-tag">// ABOUT_ME</span>
+        <h2 class="section-title">Who I Am</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="about-grid">
+        <div class="about-visual fade-in">
+          <div class="avatar-frame">
+            <div class="avatar-ring ring-1"></div>
+            <div class="avatar-ring ring-2"></div>
+            <div class="avatar-ring ring-3"></div>
+            <div class="avatar-initials">KM</div>
+            <div class="avatar-scan"></div>
+          </div>
+          <div class="about-info-chips">
+            <div class="info-chip">
+              <span class="chip-icon">📍</span>
+              <span>Bangalore, India</span>
+            </div>
+            <div class="info-chip">
+              <span class="chip-icon">🏢</span>
+              <span>Accenture — Senior Analyst</span>
+            </div>
+            <div class="info-chip">
+              <span class="chip-icon">🎯</span>
+              <span>Targeting SRE Roles</span>
+            </div>
+            <div class="info-chip">
+              <span class="chip-icon">🎓</span>
+              <span>PSM I Certified</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-content fade-in">
+          <p class="about-lead">
+            I'm a <span class="highlight">Production Support & Operations Engineer</span> with 8 years of hands-on experience keeping high-stakes systems running at scale across banking, e-commerce, and hospitality sectors.
+          </p>
+          <p class="about-body">
+            At Accenture, I've led the charge on transforming reactive fire-fighting into <span class="highlight">proactive, alert-driven operations</span> — building dashboards that catch problems before they become incidents, cutting MTTR across P1/P2 events, and driving structural root cause analysis that stops recurring failures.
+          </p>
+          <p class="about-body">
+            I've worked across the full incident lifecycle: triage, coordination, resolution, and post-mortems. I understand both the <span class="highlight">technical layer</span> (Java microservices, observability stacks, APM tools) and the <span class="highlight">operational layer</span> (SLA governance, change management, cross-functional coordination).
+          </p>
+          <p class="about-body">
+            Currently upskilling in <span class="highlight">AWS and platform reliability engineering</span> to transition into a full-time SRE role — where my ops depth meets infrastructure-as-code thinking.
+          </p>
+          <div class="about-domains">
+            <div class="domain-tag" id="domainBanking">💰 Investment Banking</div>
+            <div class="domain-tag" id="domainEcom">🛍️ E-Commerce</div>
+            <div class="domain-tag" id="domainHosp">🏨 Hospitality</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SKILLS SECTION
+  ═══════════════════════════════════════════════ -->
+  <section class="section section-dark" id="skills">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-tag">// CORE_SKILLS</span>
+        <h2 class="section-title">Tech Arsenal</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid">
+
+        <div class="skill-category fade-in" id="skillCatOps">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">⚡</div>
+            <h3 class="skill-cat-title">Operations & Incident Mgmt</h3>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag tier-1">P1/P2 Incident Response</span>
+            <span class="skill-tag tier-1">Root Cause Analysis</span>
+            <span class="skill-tag tier-1">MTTR Reduction</span>
+            <span class="skill-tag tier-2">SLA Governance</span>
+            <span class="skill-tag tier-2">Change Management</span>
+            <span class="skill-tag tier-2">On-Call Support</span>
+            <span class="skill-tag tier-2">Post-Mortem Reviews</span>
+          </div>
+        </div>
+
+        <div class="skill-category fade-in" id="skillCatObs">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">👁️</div>
+            <h3 class="skill-cat-title">Observability & Monitoring</h3>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag tier-1">Dynatrace</span>
+            <span class="skill-tag tier-1">Splunk</span>
+            <span class="skill-tag tier-2">AppDynamics</span>
+            <span class="skill-tag tier-2">Sumo Logic</span>
+            <span class="skill-tag tier-2">Synthetic Monitoring</span>
+            <span class="skill-tag tier-3">Custom Dashboards</span>
+            <span class="skill-tag tier-3">APM</span>
+            <span class="skill-tag tier-3">Log Analysis</span>
+          </div>
+        </div>
+
+        <div class="skill-category fade-in" id="skillCatPlatform">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">🏗️</div>
+            <h3 class="skill-cat-title">Platforms & Infrastructure</h3>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag tier-1">Java Microservices</span>
+            <span class="skill-tag tier-2">AWS (Foundational)</span>
+            <span class="skill-tag tier-2">SAP (Cron/Batch)</span>
+            <span class="skill-tag tier-3">ServiceNow</span>
+            <span class="skill-tag tier-3">Postman</span>
+            <span class="skill-tag tier-3">SOAP UI</span>
+          </div>
+        </div>
+
+        <div class="skill-category fade-in" id="skillCatMethod">
+          <div class="skill-cat-header">
+            <div class="skill-cat-icon">🔄</div>
+            <h3 class="skill-cat-title">Methodologies & Tools</h3>
+          </div>
+          <div class="skill-tags">
+            <span class="skill-tag tier-1">Agile / Scrum</span>
+            <span class="skill-tag tier-2">Jira</span>
+            <span class="skill-tag tier-2">Team Mentoring</span>
+            <span class="skill-tag tier-2">Cross-functional Coordination</span>
+            <span class="skill-tag tier-3">Release Planning</span>
+            <span class="skill-tag tier-3">Deployment Execution</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Certifications -->
+      <div class="certs-row fade-in">
+        <h3 class="certs-title">Certifications</h3>
+        <div class="certs-grid">
+          <div class="cert-card" id="certPSM">
+            <div class="cert-icon">🏅</div>
+            <div class="cert-info">
+              <span class="cert-name">Professional Scrum Master I (PSM I)</span>
+              <span class="cert-org">Scrum.org · 2026</span>
+            </div>
+            <span class="cert-badge active">Earned</span>
+          </div>
+          <div class="cert-card" id="certAWS">
+            <div class="cert-icon">☁️</div>
+            <div class="cert-info">
+              <span class="cert-name">AWS Certified Cloud Practitioner</span>
+              <span class="cert-org">Amazon Web Services</span>
+            </div>
+            <span class="cert-badge in-progress">In Progress</span>
+          </div>
+          <div class="cert-card" id="certITIL">
+            <div class="cert-icon">📋</div>
+            <div class="cert-info">
+              <span class="cert-name">ITIL 4 Foundation</span>
+              <span class="cert-org">Axelos</span>
+            </div>
+            <span class="cert-badge in-progress">In Progress</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       EXPERIENCE SECTION
+  ═══════════════════════════════════════════════ -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-tag">// EXPERIENCE</span>
+        <h2 class="section-title">Career Timeline</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="company-banner fade-in">
+        <div class="company-banner-inner">
+          <div class="company-logo-block">
+            <span class="company-logo-text">ACCENTURE</span>
+          </div>
+          <div class="company-meta">
+            <span class="company-role">Custom Software Engineering · Senior Analyst</span>
+            <span class="company-tenure">May 2017 – Jun 2025 &nbsp;·&nbsp; 8 Years</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline">
+
+        <div class="timeline-item fade-in" id="expTruist">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-card-header">
+              <div>
+                <span class="timeline-client">Truist – Investment Banking</span>
+                <h3 class="timeline-role">Reliability & Operations Lead</h3>
+              </div>
+              <span class="timeline-date">Apr 2024 – Jun 2025</span>
+            </div>
+            <div class="timeline-industry-tag">💰 Banking</div>
+            <ul class="timeline-bullets">
+              <li>Managed production stability for Java-based Wealth &amp; Trust microservices in high-volume banking environment.</li>
+              <li>Shifted team from reactive to proactive monitoring — built Splunk dashboards separating system errors from user errors and added threshold-based alerts, catching problems before P1/P2 escalation.</li>
+              <li>Led full incident lifecycle in ServiceNow: triage, coordination with dev/ops, post-mortem reviews, driving MTTR reduction.</li>
+              <li>Conducted structured RCA on recurring application failures and coordinated permanent fixes.</li>
+              <li>Managed release planning and deployment execution across QA, Dev, and Ops — zero unplanned downtime during production changes.</li>
+            </ul>
+            <div class="timeline-tools">
+              <span class="tool-chip">Splunk</span>
+              <span class="tool-chip">ServiceNow</span>
+              <span class="tool-chip">Java Microservices</span>
+              <span class="tool-chip">RCA</span>
+              <span class="tool-chip">P1/P2</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in" id="expChanel">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-card-header">
+              <div>
+                <span class="timeline-client">Chanel – E-Commerce</span>
+                <h3 class="timeline-role">Operations & Process Lead</h3>
+              </div>
+              <span class="timeline-date">May 2023 – Mar 2024</span>
+            </div>
+            <div class="timeline-industry-tag">🛍️ E-Commerce</div>
+            <ul class="timeline-bullets">
+              <li>Replaced hourly manual webpage checks with Dynatrace synthetic monitoring simulating user journeys — cut routine monitoring effort from ~15 min/hr to under 5 and enabled outage detection without human watch.</li>
+              <li>Oversaw production monitoring across multiple global regions supporting e-commerce platform rollout into new markets.</li>
+              <li>Trained and mentored junior team members on Dynatrace, log analysis, and incident triage best practices.</li>
+              <li>Monitored and troubleshot global scheduled batch jobs (crons) via SAP to ensure uninterrupted business processing across time zones.</li>
+            </ul>
+            <div class="timeline-tools">
+              <span class="tool-chip">Dynatrace</span>
+              <span class="tool-chip">Synthetic Monitoring</span>
+              <span class="tool-chip">SAP</span>
+              <span class="tool-chip">Mentoring</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in" id="expMarriottCIAM">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-card-header">
+              <div>
+                <span class="timeline-client">Marriott – Hospitality (CIAM)</span>
+                <h3 class="timeline-role">Technical Operations Analyst – CIAM</h3>
+              </div>
+              <span class="timeline-date">Aug 2021 – May 2023</span>
+            </div>
+            <div class="timeline-industry-tag">🏨 Hospitality</div>
+            <ul class="timeline-bullets">
+              <li>Led observability stack migration from AppDynamics &amp; Sumo Logic to Dynatrace &amp; Splunk — tested monitoring coverage continuity and ramped team up on new tools.</li>
+              <li>Coordinated endpoint migrations to securely manage customer identities, user registration, and application access.</li>
+              <li>Served as technical point of contact for onboarding new partner integrations with Marriott.com.</li>
+              <li>Provided real-time technical support alongside dev teams during critical deployment windows.</li>
+            </ul>
+            <div class="timeline-tools">
+              <span class="tool-chip">Dynatrace</span>
+              <span class="tool-chip">Splunk</span>
+              <span class="tool-chip">AppDynamics</span>
+              <span class="tool-chip">Sumo Logic</span>
+              <span class="tool-chip">CIAM</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in" id="expMarriottProfile">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-card-header">
+              <div>
+                <span class="timeline-client">Marriott – Hospitality (Profile Services)</span>
+                <h3 class="timeline-role">Technical Operations Analyst – Profile Services</h3>
+              </div>
+              <span class="timeline-date">Jun 2017 – Jul 2021</span>
+            </div>
+            <div class="timeline-industry-tag">🏨 Hospitality</div>
+            <ul class="timeline-bullets">
+              <li>Supported data migration and system integration across legacy platforms during the Marriott, Starwood, and Ritz-Carlton systems merger.</li>
+              <li>Transitioned team from manual status-checking to alert-driven monitoring by redesigning operational workflows and building dashboards for early system degradation detection during high-traffic release windows.</li>
+              <li>Onboarded and trained new resources on application architecture, internal support processes, and monitoring tools.</li>
+            </ul>
+            <div class="timeline-tools">
+              <span class="tool-chip">AppDynamics</span>
+              <span class="tool-chip">Sumo Logic</span>
+              <span class="tool-chip">Data Migration</span>
+              <span class="tool-chip">Training</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SERVICES SECTION
+  ═══════════════════════════════════════════════ -->
+  <section class="section section-dark" id="services">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-tag">// SERVICES</span>
+        <h2 class="section-title">What I Bring</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card fade-in" id="svcIncident">
+          <div class="service-card-glow"></div>
+          <div class="service-icon">🚨</div>
+          <h3 class="service-title">Incident Management</h3>
+          <p class="service-desc">Full P1/P2 lifecycle ownership — from rapid triage and war-room coordination to structured post-mortems that prevent recurrence. MTTR reduction is my measurable output.</p>
+          <ul class="service-features">
+            <li>P1/P2 Triage & Escalation</li>
+            <li>War-room Coordination</li>
+            <li>Post-mortem Facilitation</li>
+            <li>MTTR Tracking</li>
+          </ul>
+        </div>
+
+        <div class="service-card fade-in" id="svcObs">
+          <div class="service-card-glow"></div>
+          <div class="service-icon">📊</div>
+          <h3 class="service-title">Observability Design</h3>
+          <p class="service-desc">Build dashboards and alert frameworks that shift teams from reactive fire-fighting to proactive operations — using Dynatrace, Splunk, AppDynamics, and Sumo Logic.</p>
+          <ul class="service-features">
+            <li>Custom Dashboard Design</li>
+            <li>Threshold-based Alerting</li>
+            <li>Synthetic Monitoring Setup</li>
+            <li>APM Configuration</li>
+          </ul>
+        </div>
+
+        <div class="service-card fade-in" id="svcSRE">
+          <div class="service-card-glow"></div>
+          <div class="service-icon">⚙️</div>
+          <h3 class="service-title">Reliability Engineering</h3>
+          <p class="service-desc">SLA governance, production availability management, and structured reliability improvement for Java microservice environments at scale.</p>
+          <ul class="service-features">
+            <li>SLA/SLO Governance</li>
+            <li>Production Availability</li>
+            <li>Microservice Stability</li>
+            <li>AWS Foundational</li>
+          </ul>
+        </div>
+
+        <div class="service-card fade-in" id="svcOps">
+          <div class="service-card-glow"></div>
+          <div class="service-icon">🔄</div>
+          <h3 class="service-title">Operations Process Design</h3>
+          <p class="service-desc">Transform legacy manual workflows into alert-driven, automated operational processes — reducing toil, eliminating human error, and improving team scalability.</p>
+          <ul class="service-features">
+            <li>Workflow Redesign</li>
+            <li>Toil Reduction</li>
+            <li>Release Planning</li>
+            <li>Change Management</li>
+          </ul>
+        </div>
+
+        <div class="service-card fade-in" id="svcMentor">
+          <div class="service-card-glow"></div>
+          <div class="service-icon">🎓</div>
+          <h3 class="service-title">Team Training & Mentoring</h3>
+          <p class="service-desc">Ramp up junior engineers on APM tools, incident triage, and ops best practices. I've trained teams across Dynatrace, Splunk, and log analysis across multiple projects.</p>
+          <ul class="service-features">
+            <li>APM Tool Onboarding</li>
+            <li>Incident Triage Training</li>
+            <li>Knowledge Transfer</li>
+            <li>Process Documentation</li>
+          </ul>
+        </div>
+
+        <div class="service-card fade-in" id="svcCoord">
+          <div class="service-card-glow"></div>
+          <div class="service-icon">🤝</div>
+          <h3 class="service-title">Cross-functional Coordination</h3>
+          <p class="service-desc">Bridge dev, ops, and business teams during critical events — release windows, platform migrations, and partner integrations — ensuring alignment and zero unplanned downtime.</p>
+          <ul class="service-features">
+            <li>Dev/Ops Bridging</li>
+            <li>Partner Integration</li>
+            <li>Platform Migrations</li>
+            <li>Deployment Windows</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       CONTACT SECTION
+  ═══════════════════════════════════════════════ -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-header fade-in">
+        <span class="section-tag">// CONTACT</span>
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info fade-in">
+          <p class="contact-intro">
+            Looking for a production-tested operations engineer ready to grow into SRE?<br/>Let's talk.
+          </p>
+          <div class="contact-items">
+            <a href="mailto:manickannankavin@gmail.com" class="contact-item" id="contactEmail">
+              <div class="contact-item-icon">✉️</div>
+              <div class="contact-item-body">
+                <span class="contact-item-label">Email</span>
+                <span class="contact-item-value">manickannankavin@gmail.com</span>
+              </div>
+            </a>
+            <a href="tel:+919342665508" class="contact-item" id="contactPhone">
+              <div class="contact-item-icon">📞</div>
+              <div class="contact-item-body">
+                <span class="contact-item-label">Phone</span>
+                <span class="contact-item-value">+91 93426 65508</span>
+              </div>
+            </a>
+            <a href="https://linkedin.com/in/manickannankavin" target="_blank" rel="noopener noreferrer" class="contact-item" id="contactLinkedIn">
+              <div class="contact-item-icon">💼</div>
+              <div class="contact-item-body">
+                <span class="contact-item-label">LinkedIn</span>
+                <span class="contact-item-value">linkedin.com/in/manickannankavin</span>
+              </div>
+            </a>
+            <a href="https://github.com/kavinmanickannan" target="_blank" rel="noopener noreferrer" class="contact-item" id="contactGitHub">
+              <div class="contact-item-icon">🐙</div>
+              <div class="contact-item-body">
+                <span class="contact-item-label">GitHub</span>
+                <span class="contact-item-value">github.com/kavinmanickannan</span>
+              </div>
+            </a>
+            <div class="contact-item" id="contactLocation">
+              <div class="contact-item-icon">📍</div>
+              <div class="contact-item-body">
+                <span class="contact-item-label">Location</span>
+                <span class="contact-item-value">Bangalore, India</span>
+              </div>
+            </div>
+          </div>
+          <div class="contact-availability">
+            <div class="avail-dot"></div>
+            <span>Open to SRE / Platform Engineering / Senior Ops roles</span>
+          </div>
+        </div>
+        <div class="contact-cta-wrap fade-in">
+          <div class="contact-cta-card">
+            <div class="contact-cta-icon">📨</div>
+            <h3 class="contact-cta-title">Send Me a Message</h3>
+            <p class="contact-cta-desc">
+              Click below to open your mail client with my address pre-filled — I read every message and reply within 24 hours.
+            </p>
+            <a href="mailto:manickannankavin@gmail.com?subject=SRE%20Opportunity&body=Hi%20Kavin%2C%0A%0A" class="btn btn-primary btn-full" id="ctaEmailBtn">
+              <span>Email Me</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <span class="logo-bracket">[</span>KM<span class="logo-bracket">]</span>
+      </div>
+      <p class="footer-copy">
+        Designed &amp; built with ❤️ · <span class="highlight">Kavin Manickannan</span> © <span id="footerYear">2025</span>
+      </p>
+      <div class="footer-links">
+        <a href="#hero">Top</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+        <a href="https://github.com/kavinmanickannan" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
