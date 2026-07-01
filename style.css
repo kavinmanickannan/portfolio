@@ -503,6 +503,27 @@ body {
 
 .btn-full { width: 100%; justify-content: center; }
 
+.btn-resume {
+  background: transparent;
+  color: var(--purple);
+  border: 1px solid var(--purple);
+}
+.btn-resume:hover {
+  background: var(--purple-dim);
+  box-shadow: 0 0 24px var(--purple-glow);
+  transform: translateY(-2px);
+}
+
+/* Nav resume link — visually distinct from regular nav items */
+.nav-link-resume {
+  color: var(--cyan) !important;
+  border: 1px solid var(--border);
+}
+.nav-link-resume:hover {
+  border-color: var(--border-hover);
+  background: var(--cyan-dim);
+}
+
 /* ── SECTIONS ─────────────────────────────────────────── */
 .section {
   padding: var(--section-gap) 24px;

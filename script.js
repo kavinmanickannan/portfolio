@@ -165,7 +165,7 @@ const roles = [
   'Operations Lead @ Accenture',
   'Observability Specialist',
   'Incident Management Expert',
-  'Aspiring Site Reliability Engineer',
+  'SRE / Platform Engineering Specialist',
 ];
 
 const typingEl = document.getElementById('heroTyping');
@@ -205,6 +205,7 @@ typingTimer = setTimeout(typeRole, 800);
 // ──────────────────────────────────────────────────────────
 function animateCounter(el) {
   const target = parseInt(el.getAttribute('data-target'), 10);
+  if (target === 0) { el.textContent = '0'; return; }
   const duration = 1800;
   const start = performance.now();
 
@@ -214,7 +215,7 @@ function animateCounter(el) {
     const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
     el.textContent = Math.floor(eased * target);
     if (progress < 1) requestAnimationFrame(step);
-    else el.textContent = target;
+    else el.textContent = String(target);
   }
 
   requestAnimationFrame(step);
