@@ -161,11 +161,11 @@ window.addEventListener('resize', () => {
 // TYPING ANIMATION
 // ──────────────────────────────────────────────────────────
 const roles = [
-  'Production Support Engineer',
-  'Operations Lead @ Accenture',
-  'Observability Specialist',
-  'Incident Management Expert',
-  'SRE / Platform Engineering Specialist',
+  'Building DairyDoc — EMR for Indian Dental Clinics',
+  'Co-Founder at Latte Health',
+  'Shipping Healthcare Software That Actually Works',
+  '3.5 Lakh+ Clinics. Still Running On Paper.',
+  'From Dentist Friend to Full-Stack EMR',
 ];
 
 const typingEl = document.getElementById('heroTyping');
@@ -251,6 +251,20 @@ const heroObs   = new IntersectionObserver((entries) => {
 
 const heroStats = document.querySelector('.hero-stats');
 if (heroStats) heroObs.observe(heroStats);
+
+const tractionNums = document.querySelectorAll('.traction-num[data-target]');
+let tractionCountersRun = false;
+const tractionObs = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting && !tractionCountersRun) {
+      tractionCountersRun = true;
+      tractionNums.forEach(el => animateCounter(el));
+    }
+  });
+}, { threshold: 0.3 });
+
+const tractionGrid = document.querySelector('.traction-grid');
+if (tractionGrid) tractionObs.observe(tractionGrid);
 
 // ──────────────────────────────────────────────────────────
 // ACTIVE NAV LINK — SCROLL SPY
