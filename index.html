@@ -1,590 +1,469 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="auto" data-accent="green" data-effect="mesh-gradient" data-motion="on">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kavin Manickannan | Founder · DairyDoc · Latte Health</title>
-  <meta name="description" content="Kavin Manickannan — Founder building DairyDoc, a full-stack EMR for Indian dental clinics, and Co-Founder at Latte Health, building open clinical AI infrastructure. 8 years of production systems experience turned into products." />
+  <meta name="description" content="Kavin Manickannan — founder building DairyDoc, a full-stack EMR for Indian dental clinics, and co-founder at Latte Health, building open clinical AI infrastructure. Eight years of production systems experience, now turned into products." />
   <meta name="keywords" content="Kavin Manickannan, founder, DairyDoc, dental EMR, Latte Health, clinical AI, healthcare software India, dental clinic software" />
   <meta name="author" content="Kavin Manickannan" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%23020818%22/><text x=%2250%22 y=%2266%22 font-family=%22monospace%22 font-size=%2244%22 font-weight=%22700%22 fill=%22%2300d4ff%22 text-anchor=%22middle%22>KM</text></svg>" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#f4f3ef" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#111412" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%23181a19%22/><text x=%2250%22 y=%2264%22 font-family=%22Helvetica,Arial,sans-serif%22 font-size=%2240%22 font-weight=%22600%22 fill=%22%23f4f3ef%22 text-anchor=%22middle%22>KM</text></svg>" />
+
+  <!-- Apply saved preferences before first paint, so there is no flash of the wrong theme -->
+  <script id="site-preferences">
+    (function () {
+      try {
+        var r = document.documentElement;
+        var t = localStorage.getItem('km-theme');
+        var a = localStorage.getItem('km-accent');
+        var e = localStorage.getItem('km-effect');
+        var m = localStorage.getItem('km-motion');
+        var effects = ['mesh-gradient', 'grain-gradient', 'warp', 'simplex-noise', 'metaballs', 'dithering', 'pulsing-border'];
+        var accents = ['green', 'blue', 'amber', 'plum'];
+        if (t !== 'light' && t !== 'dark' && t !== 'auto') t = 'auto';
+        if (accents.indexOf(a) < 0) a = 'green';
+        if (effects.indexOf(e) < 0) e = 'mesh-gradient';
+        if (m !== 'on' && m !== 'off') m = 'on';
+        r.dataset.theme = t;
+        r.dataset.accent = a;
+        r.dataset.effect = e;
+        r.dataset.motion = m;
+      } catch (x) {}
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to the content</a>
+
+  <div class="layout">
+
+    <!-- ═══════════════════════════════════════════════
+         SIDEBAR
+    ═══════════════════════════════════════════════ -->
+    <header class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <a href="#top" class="brand" aria-label="Kavin Manickannan — back to top">
+          <span class="brand-mark" aria-hidden="true">KM</span>
+          <span class="brand-name">Kavin Manickannan</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="sidebarBody">
+          <span class="menu-toggle-label">Menu</span>
+        </button>
+      </div>
+
+      <div class="sidebar-body" id="sidebarBody">
+        <p class="sidebar-bio">Founder building healthcare software for clinics that have been left behind by the market.</p>
+
+        <nav class="side-nav" aria-label="Sections">
+          <a href="#now" class="side-link">Now</a>
+          <a href="#story" class="side-link">Story</a>
+          <a href="#work" class="side-link">Work</a>
+          <a href="#toolkit" class="side-link">Toolkit</a>
+          <a href="#contact" class="side-link">Contact</a>
+        </nav>
+
+        <div class="side-social">
+          <a href="https://www.linkedin.com/in/manickannankavin" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a href="https://github.com/kavinmanickannan" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <button class="personalise-btn" id="personaliseBtn" aria-haspopup="dialog" aria-controls="personalise">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor"/></svg>
+          <span>Personalise</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════
+         MAIN
+    ═══════════════════════════════════════════════ -->
+    <main class="main" id="main">
+
+      <!-- HERO -->
+      <section class="hero" id="top">
+        <div class="hero-visual" id="heroVisual" aria-hidden="true">
+          <div class="hero-fallback"></div>
+        </div>
+        <div class="hero-text reveal">
+          <p class="eyebrow">Founder · Builder · Bangalore</p>
+          <h1 class="hero-title">I build software for the clinics the market forgot.</h1>
+          <p class="hero-lead">
+            I'm Kavin Manickannan. After eight years keeping production systems running for banks, retailers and hotel chains, I now build healthcare products: <strong>DairyDoc</strong>, an EMR for Indian dental clinics, and <strong>Latte Health</strong>, open infrastructure for clinical AI.
+          </p>
+          <div class="hero-actions">
+            <a href="#now" class="pill pill-solid">See what I'm building <span aria-hidden="true">↓</span></a>
+            <a href="mailto:manickannankavin@gmail.com?subject=Hello%20Kavin" class="pill">Start a conversation <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+
+      <!-- NOW -->
+      <section class="section" id="now">
+        <div class="section-head reveal">
+          <p class="eyebrow">Now</p>
+          <h2 class="section-title">Two companies, one problem.</h2>
+          <p class="section-intro">Healthcare software in emerging markets is still stuck in the last decade. The gap between what practitioners need and what exists is a product waiting to be built.</p>
+        </div>
+
+        <div class="now-grid">
+          <article class="now-card reveal" id="dairydoc">
+            <div class="now-card-top">
+              <span class="tag">Founder</span>
+              <span class="now-place">Building in Bangalore</span>
+            </div>
+            <h3 class="now-title">DairyDoc</h3>
+            <p class="now-sub">A full-stack EMR for the 3.5 lakh+ dental clinics in India still running on paper, WhatsApp and memory.</p>
+            <ul class="check-list">
+              <li>On-premise first, with a SaaS path built in from day one</li>
+              <li>Interactive SVG odontogram, OPD workflow and treatment planning</li>
+              <li>GST billing, lab orders, X-ray/DICOM viewer and inventory</li>
+              <li>ABDM/ABHA integration for India's national health network</li>
+            </ul>
+            <p class="now-stack">Next.js · Node.js · PostgreSQL · Docker · MinIO</p>
+          </article>
+
+          <article class="now-card reveal" id="lattehealth">
+            <div class="now-card-top">
+              <span class="tag">Co-founder</span>
+              <span class="now-place">Open clinical AI</span>
+            </div>
+            <h3 class="now-title">Latte Health</h3>
+            <p class="now-sub">Open-weight models and privacy-preserving tools for the next era of clinical management.</p>
+            <ul class="check-list">
+              <li>Interoperable, reliable and secure by design</li>
+              <li>Primitives that healthcare teams actually own</li>
+              <li>Not locked behind a vendor's API</li>
+            </ul>
+            <a href="https://lattehealth.co.uk" target="_blank" rel="noopener noreferrer" class="text-link">Visit Latte Health <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+
+        <dl class="stats reveal">
+          <div class="stat">
+            <dt>DairyDoc screens built</dt>
+            <dd><span class="count" data-target="100">100</span>+</dd>
+          </div>
+          <div class="stat">
+            <dt>Phases complete, auth to loyalty</dt>
+            <dd><span class="count" data-target="18">18</span></dd>
+          </div>
+          <div class="stat">
+            <dt>Companies founded</dt>
+            <dd><span class="count" data-target="2">2</span></dd>
+          </div>
+          <div class="stat">
+            <dt>Years running production systems</dt>
+            <dd><span class="count" data-target="8">8</span>+</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- STORY -->
+      <section class="section" id="story">
+        <div class="section-head reveal">
+          <p class="eyebrow">How it started</p>
+          <h2 class="section-title">A friend needed help. The software didn't exist.</h2>
+        </div>
+        <div class="prose reveal">
+          <p class="prose-lead">A dentist friend asked me to help him manage his patients. I sat down to understand the problem and realised the software just didn't exist for clinics like his.</p>
+          <p>Most dental clinics in India run on a combination of paper registers, WhatsApp reminders and Excel sheets, or on outdated software that wasn't built for how a clinic actually works. Software built for Western markets has the wrong pricing and the wrong workflow. My friend didn't need another generic CRM. He needed something that understood odontograms, lab slips, GST billing and the way a dentist actually moves through a day.</p>
+          <p>So I built it. DairyDoc is now about 100 screens across 18 phases, from the interactive tooth chart to GST-compliant invoicing to a patient loyalty programme, with a clear path to SaaS and ABDM/ABHA integration.</p>
+          <p>Alongside that, I co-founded Latte Health to build open, privacy-preserving infrastructure for clinical AI. The thread is consistent: the people delivering care deserve tools that fit how they work, and that they actually own.</p>
+        </div>
+      </section>
+
+      <!-- WORK -->
+      <section class="section" id="work">
+        <div class="section-head reveal">
+          <p class="eyebrow">Selected work</p>
+          <h2 class="section-title">Eight years keeping systems up. Now building my own.</h2>
+          <p class="section-intro">Products I'm building, plus my time at Accenture as a Senior Analyst in Custom Software Engineering (May 2017 – Jun 2025). Open a row for the details.</p>
+        </div>
+
+        <ol class="work-list">
+          <li class="work-item reveal">
+            <details>
+              <summary>
+                <span class="work-num">01</span>
+                <span class="work-meta"><span class="work-industry">Healthcare</span><span class="work-date">Now</span></span>
+                <span class="work-main">
+                  <span class="work-title">DairyDoc</span>
+                  <span class="work-desc">A full-stack, on-premise-first EMR built for how Indian dental clinics actually work.</span>
+                </span>
+                <span class="work-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="work-body">
+                <p>~100 screens across 18 phases: interactive SVG odontogram, OPD workflow, treatment planning, GST billing, lab order tracking, periodontal charting, X-ray/DICOM viewer, inventory, patient loyalty programme and ABDM/ABHA integration.</p>
+                <div class="chips"><span>Next.js</span><span>Node.js</span><span>PostgreSQL</span><span>Docker</span><span>MinIO</span></div>
+              </div>
+            </details>
+          </li>
+
+          <li class="work-item reveal">
+            <details>
+              <summary>
+                <span class="work-num">02</span>
+                <span class="work-meta"><span class="work-industry">Clinical AI</span><span class="work-date">Now</span></span>
+                <span class="work-main">
+                  <span class="work-title">Latte Health</span>
+                  <span class="work-desc">Open-weight models and privacy-preserving tools that healthcare teams can own.</span>
+                </span>
+                <span class="work-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="work-body">
+                <p>Clinical AI needs open infrastructure. As co-founder, I'm building the primitives for interoperable, reliable and secure clinical management, rather than another closed vendor API.</p>
+                <a href="https://lattehealth.co.uk" target="_blank" rel="noopener noreferrer" class="text-link">lattehealth.co.uk <span aria-hidden="true">↗</span></a>
+              </div>
+            </details>
+          </li>
+
+          <li class="work-item reveal">
+            <details>
+              <summary>
+                <span class="work-num">03</span>
+                <span class="work-meta"><span class="work-industry">Personal tools</span><span class="work-date">Live</span></span>
+                <span class="work-main">
+                  <span class="work-title">Life Compass</span>
+                  <span class="work-desc">A personal "ops dashboard" for life: tasks, open decisions, money and routines in one place.</span>
+                </span>
+                <span class="work-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="work-body">
+                <p>Built during my own job search, when I needed the same thing I build for production systems: one place that shows what's on fire, what's stable and which decision is still open, instead of that living across five apps and my head.</p>
+                <div class="chips"><span>React</span><span>TypeScript</span><span>TanStack Router</span><span>Tailwind</span><span>Cloudflare</span></div>
+                <a href="https://github.com/kavinmanickannan/life-compass" target="_blank" rel="noopener noreferrer" class="text-link">View on GitHub <span aria-hidden="true">↗</span></a>
+              </div>
+            </details>
+          </li>
+
+          <li class="work-item reveal">
+            <details>
+              <summary>
+                <span class="work-num">04</span>
+                <span class="work-meta"><span class="work-industry">Banking</span><span class="work-date">Apr 2024 – Jun 2025</span></span>
+                <span class="work-main">
+                  <span class="work-title">Truist · Reliability &amp; Operations Lead</span>
+                  <span class="work-desc">Production stability for Java-based Wealth &amp; Trust microservices in a high-volume banking environment.</span>
+                </span>
+                <span class="work-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="work-body">
+                <ul>
+                  <li>Shifted the team from reactive to proactive monitoring: Splunk dashboards separating system errors from user errors, plus threshold alerts that caught problems before P1/P2 escalation.</li>
+                  <li>Led the full incident lifecycle in ServiceNow (triage, coordination with dev and ops, post-mortems), driving MTTR down.</li>
+                  <li>Ran structured RCA on recurring failures and coordinated permanent fixes.</li>
+                  <li>Managed release planning and deployments across QA, Dev and Ops with zero unplanned downtime.</li>
+                </ul>
+                <div class="chips"><span>Splunk</span><span>ServiceNow</span><span>Java microservices</span><span>RCA</span><span>P1/P2</span></div>
+              </div>
+            </details>
+          </li>
+
+          <li class="work-item reveal">
+            <details>
+              <summary>
+                <span class="work-num">05</span>
+                <span class="work-meta"><span class="work-industry">E-commerce</span><span class="work-date">May 2023 – Mar 2024</span></span>
+                <span class="work-main">
+                  <span class="work-title">Chanel · Operations &amp; Process Lead</span>
+                  <span class="work-desc">Replaced hourly manual checks with synthetic monitoring across a global e-commerce rollout.</span>
+                </span>
+                <span class="work-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="work-body">
+                <ul>
+                  <li>Dynatrace synthetic monitoring simulating user journeys cut routine monitoring from ~15 min/hr to under 5, and caught outages without anyone watching.</li>
+                  <li>Oversaw production monitoring across multiple global regions as the platform rolled into new markets.</li>
+                  <li>Trained and mentored junior team members on Dynatrace, log analysis and incident triage.</li>
+                  <li>Monitored and troubleshot global SAP batch jobs to keep business processing running across time zones.</li>
+                </ul>
+                <div class="chips"><span>Dynatrace</span><span>Synthetic monitoring</span><span>SAP</span><span>Mentoring</span></div>
+              </div>
+            </details>
+          </li>
+
+          <li class="work-item reveal">
+            <details>
+              <summary>
+                <span class="work-num">06</span>
+                <span class="work-meta"><span class="work-industry">Hospitality</span><span class="work-date">Aug 2021 – May 2023</span></span>
+                <span class="work-main">
+                  <span class="work-title">Marriott · Technical Operations Analyst, CIAM</span>
+                  <span class="work-desc">Led the observability migration for customer identity and access management.</span>
+                </span>
+                <span class="work-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="work-body">
+                <ul>
+                  <li>Moved monitoring from AppDynamics and Sumo Logic to Dynatrace and Splunk, testing coverage continuity and ramping the team up on the new tools.</li>
+                  <li>Coordinated endpoint migrations for customer identities, registration and application access.</li>
+                  <li>Technical point of contact for onboarding new partner integrations with Marriott.com.</li>
+                  <li>Real-time support alongside dev teams during critical deployment windows.</li>
+                </ul>
+                <div class="chips"><span>Dynatrace</span><span>Splunk</span><span>AppDynamics</span><span>Sumo Logic</span><span>CIAM</span></div>
+              </div>
+            </details>
+          </li>
+
+          <li class="work-item reveal">
+            <details>
+              <summary>
+                <span class="work-num">07</span>
+                <span class="work-meta"><span class="work-industry">Hospitality</span><span class="work-date">Jun 2017 – Jul 2021</span></span>
+                <span class="work-main">
+                  <span class="work-title">Marriott · Technical Operations Analyst, Profile Services</span>
+                  <span class="work-desc">Data migration and integration through the Marriott, Starwood and Ritz-Carlton systems merger.</span>
+                </span>
+                <span class="work-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="work-body">
+                <ul>
+                  <li>Supported data migration and system integration across legacy platforms during the merger.</li>
+                  <li>Moved the team from manual status checks to alert-driven monitoring, with dashboards that caught early degradation during high-traffic releases.</li>
+                  <li>Onboarded and trained new team members on application architecture, support processes and monitoring tools.</li>
+                </ul>
+                <div class="chips"><span>AppDynamics</span><span>Sumo Logic</span><span>Data migration</span><span>Training</span></div>
+              </div>
+            </details>
+          </li>
+        </ol>
+      </section>
+
+      <!-- TOOLKIT -->
+      <section class="section" id="toolkit">
+        <div class="section-head reveal">
+          <p class="eyebrow">Toolkit</p>
+          <h2 class="section-title">What eight years in production taught me to use.</h2>
+        </div>
+        <dl class="toolkit reveal">
+          <div class="toolkit-row">
+            <dt>Operations &amp; incidents</dt>
+            <dd>P1/P2 incident response · Root cause analysis · MTTR reduction · SLA governance · Change management · Post-mortems</dd>
+          </div>
+          <div class="toolkit-row">
+            <dt>Observability</dt>
+            <dd>Dynatrace · Splunk · AppDynamics · Sumo Logic · Synthetic monitoring · APM · Log analysis</dd>
+          </div>
+          <div class="toolkit-row">
+            <dt>Building products</dt>
+            <dd>Next.js · Node.js · React · TypeScript · PostgreSQL · Docker · MinIO · Tailwind · Cloudflare</dd>
+          </div>
+          <div class="toolkit-row">
+            <dt>Platforms</dt>
+            <dd>Java microservices · AWS (foundational) · SAP batch jobs · ServiceNow · Postman · SOAP UI</dd>
+          </div>
+          <div class="toolkit-row">
+            <dt>Ways of working</dt>
+            <dd>Agile / Scrum · Jira · Release planning · Mentoring · Cross-functional coordination</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="section contact" id="contact">
+        <div class="contact-card reveal">
+          <p class="eyebrow">Contact</p>
+          <h2 class="contact-title">Let's build something useful.</h2>
+          <p class="contact-intro">Open to clinic pilots, investor conversations, and anyone building at the intersection of healthcare and software in India. I reply within 24 hours.</p>
+          <a href="mailto:manickannankavin@gmail.com?subject=DairyDoc%20%2F%20Latte%20Health&amp;body=Hi%20Kavin%2C%0A%0A" class="pill pill-solid">Get in touch <span aria-hidden="true">↗</span></a>
+
+          <ul class="contact-list">
+            <li>
+              <span class="contact-label">Email</span>
+              <a href="mailto:manickannankavin@gmail.com">manickannankavin@gmail.com</a>
+            </li>
+            <li>
+              <span class="contact-label">Phone</span>
+              <a href="tel:+919342665508">+91 93426 65508</a>
+            </li>
+            <li>
+              <span class="contact-label">LinkedIn</span>
+              <a href="https://www.linkedin.com/in/manickannankavin" target="_blank" rel="noopener noreferrer">linkedin.com/in/manickannankavin ↗</a>
+            </li>
+            <li>
+              <span class="contact-label">GitHub</span>
+              <a href="https://github.com/kavinmanickannan" target="_blank" rel="noopener noreferrer">github.com/kavinmanickannan ↗</a>
+            </li>
+            <li>
+              <span class="contact-label">Location</span>
+              <span>Bangalore, India</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <p>© <span id="footerYear">2026</span> Kavin Manickannan</p>
+        <a href="#top">Back to top ↑</a>
+      </footer>
+    </main>
+  </div>
 
   <!-- ═══════════════════════════════════════════════
-       CURSOR GLOW
+       PERSONALISE PANEL
   ═══════════════════════════════════════════════ -->
-  <div class="cursor-glow" id="cursorGlow"></div>
-
-  <!-- ═══════════════════════════════════════════════
-       NAVIGATION
-  ═══════════════════════════════════════════════ -->
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="#hero" class="nav-logo" id="navLogo">
-        <span class="logo-bracket">[</span>KM<span class="logo-bracket">]</span>
-      </a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about" class="nav-link">My Story</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#experience" class="nav-link">Experience</a></li>
-        <li><a href="#built" class="nav-link">Built</a></li>
-        <li><a href="#building" class="nav-link">Building</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
+  <div class="scrim" id="scrim" hidden></div>
+  <aside class="personalise" id="personalise" role="dialog" aria-modal="true" aria-labelledby="personaliseTitle" hidden>
+    <div class="personalise-head">
+      <h2 id="personaliseTitle">Personalise</h2>
+      <button class="icon-btn" id="personaliseClose" aria-label="Close personalise panel">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
     </div>
-  </nav>
+    <p class="personalise-note">Your choices are saved in this browser only.</p>
 
-  <!-- ═══════════════════════════════════════════════
-       HERO SECTION
-  ═══════════════════════════════════════════════ -->
-  <section class="hero" id="hero">
-    <canvas class="hero-canvas" id="heroCanvas"></canvas>
-    <div class="scanlines"></div>
-    <div class="hero-content">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        <span class="badge-text">Building: DairyDoc — EMR for Indian dental clinics</span>
+    <fieldset class="pref-group">
+      <legend>Theme</legend>
+      <div class="segmented" role="radiogroup" aria-label="Theme">
+        <button role="radio" data-pref="theme" data-value="auto">Auto</button>
+        <button role="radio" data-pref="theme" data-value="light">Light</button>
+        <button role="radio" data-pref="theme" data-value="dark">Dark</button>
       </div>
-      <p class="hero-sub-label">FOUNDER · DAIRYDOC · CO-FOUNDER · LATTE HEALTH</p>
-      <h1 class="hero-name" id="heroName">
-        <span class="glitch" data-text="KAVIN">KAVIN</span>
-        <span class="glitch hero-name-last" data-text="MANICKANNAN">MANICKANNAN</span>
-      </h1>
-      <div class="hero-typing-wrapper">
-        <span class="typing-prefix">&gt;&gt;</span>
-        <span class="hero-typing" id="heroTyping"></span>
-        <span class="typing-cursor">_</span>
+    </fieldset>
+
+    <fieldset class="pref-group">
+      <legend>Accent</legend>
+      <div class="swatches" role="radiogroup" aria-label="Accent colour">
+        <button role="radio" class="swatch" data-pref="accent" data-value="green" aria-label="Green"><span style="--sw:#2a8456"></span></button>
+        <button role="radio" class="swatch" data-pref="accent" data-value="blue" aria-label="Blue"><span style="--sw:#2457c5"></span></button>
+        <button role="radio" class="swatch" data-pref="accent" data-value="amber" aria-label="Amber"><span style="--sw:#b5651d"></span></button>
+        <button role="radio" class="swatch" data-pref="accent" data-value="plum" aria-label="Plum"><span style="--sw:#7a3e9d"></span></button>
       </div>
-      <div class="hero-actions">
-        <a href="#building" class="btn btn-primary" id="heroExploreBtn">
-          <span>See DairyDoc</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="#contact" class="btn btn-outline" id="heroContactBtn">
-          <span>Let's Talk</span>
-        </a>
-        <a href="https://lattehealth.co.uk" target="_blank" rel="noopener noreferrer" class="btn btn-outline" id="heroLatteBtn">
-          <span>Latte Health</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
-        </a>
-        <a href="https://github.com/kavinmanickannan" target="_blank" rel="noopener noreferrer" class="btn btn-outline" id="heroGithubBtn">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-          <span>GitHub</span>
-        </a>
+    </fieldset>
+
+    <fieldset class="pref-group">
+      <legend>Background effect</legend>
+      <div class="effects" role="radiogroup" aria-label="Background effect">
+        <button role="radio" class="effect" data-pref="effect" data-value="mesh-gradient"><span class="effect-preview" data-preview="mesh-gradient"></span><span class="effect-name">Mesh gradient</span></button>
+        <button role="radio" class="effect" data-pref="effect" data-value="grain-gradient"><span class="effect-preview" data-preview="grain-gradient"></span><span class="effect-name">Grain gradient</span></button>
+        <button role="radio" class="effect" data-pref="effect" data-value="warp"><span class="effect-preview" data-preview="warp"></span><span class="effect-name">Warp</span></button>
+        <button role="radio" class="effect" data-pref="effect" data-value="simplex-noise"><span class="effect-preview" data-preview="simplex-noise"></span><span class="effect-name">Simplex noise</span></button>
+        <button role="radio" class="effect" data-pref="effect" data-value="metaballs"><span class="effect-preview" data-preview="metaballs"></span><span class="effect-name">Metaballs</span></button>
+        <button role="radio" class="effect" data-pref="effect" data-value="dithering"><span class="effect-preview" data-preview="dithering"></span><span class="effect-name">Dithering</span></button>
+        <button role="radio" class="effect" data-pref="effect" data-value="pulsing-border"><span class="effect-preview" data-preview="pulsing-border"></span><span class="effect-name">Pulsing border</span></button>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <span class="stat-num" data-target="100">0</span><span class="stat-unit">+</span>
-          <span class="stat-label">Screens Built</span>
-        </div>
-        <div class="hero-stat-divider"></div>
-        <div class="hero-stat">
-          <span class="stat-num" data-target="18">0</span><span class="stat-unit"></span>
-          <span class="stat-label">Phases Complete</span>
-        </div>
-        <div class="hero-stat-divider"></div>
-        <div class="hero-stat">
-          <span class="stat-num" data-target="2">0</span><span class="stat-unit"></span>
-          <span class="stat-label">Companies Founded</span>
-        </div>
+    </fieldset>
+
+    <fieldset class="pref-group">
+      <legend>Motion</legend>
+      <div class="segmented" role="radiogroup" aria-label="Motion">
+        <button role="radio" data-pref="motion" data-value="on">Animate</button>
+        <button role="radio" data-pref="motion" data-value="off">Still</button>
       </div>
-    </div>
-    <a href="#about" class="scroll-indicator" id="scrollIndicator" aria-label="Scroll down">
-      <span class="scroll-text">SCROLL</span>
-      <div class="scroll-wheel">
-        <div class="scroll-dot"></div>
-      </div>
-    </a>
-  </section>
+    </fieldset>
 
-  <!-- ═══════════════════════════════════════════════
-       ABOUT SECTION
-  ═══════════════════════════════════════════════ -->
-  <section class="section" id="about">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-tag">// MY_STORY</span>
-        <h2 class="section-title">My Story</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="about-grid">
-        <div class="about-visual fade-in">
-          <div class="avatar-frame">
-            <div class="avatar-ring ring-1"></div>
-            <div class="avatar-ring ring-2"></div>
-            <div class="avatar-ring ring-3"></div>
-            <div class="avatar-initials">KM</div>
-            <div class="avatar-scan"></div>
-          </div>
-          <div class="about-info-chips">
-            <div class="info-chip">
-              <span class="chip-icon">📍</span>
-              <span>Bangalore, India</span>
-            </div>
-            <div class="info-chip">
-              <span class="chip-icon">🦷</span>
-              <span>Founder — DairyDoc (Dental Clinic EMR)</span>
-            </div>
-            <div class="info-chip">
-              <span class="chip-icon">🧪</span>
-              <span>Co-Founder — <a href="https://lattehealth.co.uk" target="_blank" rel="noopener noreferrer" style="color:var(--cyan);text-decoration:none;">Latte Health</a> (Open Clinical AI)</span>
-            </div>
-          </div>
-        </div>
-        <div class="about-content fade-in">
-          <p class="about-lead">
-            A dentist friend asked me to help him manage his patients. I sat down to understand the problem — and realised the software just didn't exist for clinics like his.
-          </p>
-          <p class="about-body">
-            Most dental clinics in India run on a combination of paper registers, WhatsApp reminders, and Excel sheets — or outdated software that wasn't built for how a clinic actually works. My friend didn't need another generic CRM. He needed something that understood odontograms, lab slips, SAP-style batch jobs, GST billing, and the way a dentist actually moves through a day.
-          </p>
-          <p class="about-body">
-            So I built it. <span class="highlight">DairyDoc</span> is a full-stack, on-premise-first Dental Clinic EMR — 100 screens across 18 phases, covering everything from the interactive SVG tooth chart to GST-compliant invoicing to a patient loyalty programme. Built on Next.js, Node.js, PostgreSQL, Docker, and MinIO, with a clear path to SaaS and ABDM/ABHA integration for India's national health network.
-          </p>
-          <p class="about-body">
-            Alongside that, I'm a <span class="highlight">Co-Founder at Latte Health</span> — building open-weight models and privacy-preserving tools for clinical AI infrastructure. The thread is consistent: healthcare software in emerging markets is still stuck in the last decade, and the gap between what practitioners need and what exists is a product waiting to be built.
-          </p>
-          <div class="about-domains">
-            <div class="domain-tag" id="domainDental">🦷 Dental Healthcare</div>
-            <div class="domain-tag" id="domainClinicalAI">🧪 Clinical AI</div>
-            <div class="domain-tag" id="domainHealthIndia">🇮🇳 India Health-Tech</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <button class="reset-btn" id="prefReset">Reset to defaults</button>
+  </aside>
 
-  <!-- ═══════════════════════════════════════════════
-       SKILLS SECTION
-  ═══════════════════════════════════════════════ -->
-  <section class="section section-dark" id="skills">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-tag">// CORE_SKILLS</span>
-        <h2 class="section-title">Tech Arsenal</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="skills-grid">
-
-        <div class="skill-category fade-in" id="skillCatOps">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon">⚡</div>
-            <h3 class="skill-cat-title">Operations & Incident Mgmt</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag tier-1">P1/P2 Incident Response</span>
-            <span class="skill-tag tier-1">Root Cause Analysis</span>
-            <span class="skill-tag tier-1">MTTR Reduction</span>
-            <span class="skill-tag tier-2">SLA Governance</span>
-            <span class="skill-tag tier-2">Change Management</span>
-            <span class="skill-tag tier-2">On-Call Support</span>
-            <span class="skill-tag tier-2">Post-Mortem Reviews</span>
-          </div>
-        </div>
-
-        <div class="skill-category fade-in" id="skillCatObs">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon">👁️</div>
-            <h3 class="skill-cat-title">Observability & Monitoring</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag tier-1">Dynatrace</span>
-            <span class="skill-tag tier-1">Splunk</span>
-            <span class="skill-tag tier-2">AppDynamics</span>
-            <span class="skill-tag tier-2">Sumo Logic</span>
-            <span class="skill-tag tier-2">Synthetic Monitoring</span>
-            <span class="skill-tag tier-3">Custom Dashboards</span>
-            <span class="skill-tag tier-3">APM</span>
-            <span class="skill-tag tier-3">Log Analysis</span>
-          </div>
-        </div>
-
-        <div class="skill-category fade-in" id="skillCatPlatform">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon">🏗️</div>
-            <h3 class="skill-cat-title">Platforms & Infrastructure</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag tier-1">Java Microservices</span>
-            <span class="skill-tag tier-2">AWS (Foundational)</span>
-            <span class="skill-tag tier-2">SAP (Cron/Batch)</span>
-            <span class="skill-tag tier-3">ServiceNow</span>
-            <span class="skill-tag tier-3">Postman</span>
-            <span class="skill-tag tier-3">SOAP UI</span>
-          </div>
-        </div>
-
-        <div class="skill-category fade-in" id="skillCatMethod">
-          <div class="skill-cat-header">
-            <div class="skill-cat-icon">🔄</div>
-            <h3 class="skill-cat-title">Methodologies & Tools</h3>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag tier-1">Agile / Scrum</span>
-            <span class="skill-tag tier-2">Jira</span>
-            <span class="skill-tag tier-2">Team Mentoring</span>
-            <span class="skill-tag tier-2">Cross-functional Coordination</span>
-            <span class="skill-tag tier-3">Release Planning</span>
-            <span class="skill-tag tier-3">Deployment Execution</span>
-          </div>
-        </div>
-
-      </div>
-
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════
-       EXPERIENCE SECTION
-  ═══════════════════════════════════════════════ -->
-  <section class="section" id="experience">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-tag">// EXPERIENCE</span>
-        <h2 class="section-title">Career Timeline</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="company-banner fade-in">
-        <div class="company-banner-inner">
-          <div class="company-logo-block">
-            <span class="company-logo-text">ACCENTURE</span>
-          </div>
-          <div class="company-meta">
-            <span class="company-role">Custom Software Engineering · Senior Analyst</span>
-            <span class="company-tenure">May 2017 – Jun 2025 &nbsp;·&nbsp; 8 Years</span>
-          </div>
-        </div>
-      </div>
-      <div class="timeline">
-
-        <div class="timeline-item fade-in" id="expTruist">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="timeline-card-header">
-              <div>
-                <span class="timeline-client">Truist – Investment Banking</span>
-                <h3 class="timeline-role">Reliability & Operations Lead</h3>
-              </div>
-              <span class="timeline-date">Apr 2024 – Jun 2025</span>
-            </div>
-            <div class="timeline-industry-tag">💰 Banking</div>
-            <ul class="timeline-bullets">
-              <li>Managed production stability for Java-based Wealth &amp; Trust microservices in high-volume banking environment.</li>
-              <li>Shifted team from reactive to proactive monitoring — built Splunk dashboards separating system errors from user errors and added threshold-based alerts, catching problems before P1/P2 escalation.</li>
-              <li>Led full incident lifecycle in ServiceNow: triage, coordination with dev/ops, post-mortem reviews, driving MTTR reduction.</li>
-              <li>Conducted structured RCA on recurring application failures and coordinated permanent fixes.</li>
-              <li>Managed release planning and deployment execution across QA, Dev, and Ops — zero unplanned downtime during production changes.</li>
-            </ul>
-            <div class="timeline-tools">
-              <span class="tool-chip">Splunk</span>
-              <span class="tool-chip">ServiceNow</span>
-              <span class="tool-chip">Java Microservices</span>
-              <span class="tool-chip">RCA</span>
-              <span class="tool-chip">P1/P2</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item fade-in" id="expChanel">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="timeline-card-header">
-              <div>
-                <span class="timeline-client">Chanel – E-Commerce</span>
-                <h3 class="timeline-role">Operations & Process Lead</h3>
-              </div>
-              <span class="timeline-date">May 2023 – Mar 2024</span>
-            </div>
-            <div class="timeline-industry-tag">🛍️ E-Commerce</div>
-            <ul class="timeline-bullets">
-              <li>Replaced hourly manual webpage checks with Dynatrace synthetic monitoring simulating user journeys — cut routine monitoring effort from ~15 min/hr to under 5 and enabled outage detection without human watch.</li>
-              <li>Oversaw production monitoring across multiple global regions supporting e-commerce platform rollout into new markets.</li>
-              <li>Trained and mentored junior team members on Dynatrace, log analysis, and incident triage best practices.</li>
-              <li>Monitored and troubleshot global scheduled batch jobs (crons) via SAP to ensure uninterrupted business processing across time zones.</li>
-            </ul>
-            <div class="timeline-tools">
-              <span class="tool-chip">Dynatrace</span>
-              <span class="tool-chip">Synthetic Monitoring</span>
-              <span class="tool-chip">SAP</span>
-              <span class="tool-chip">Mentoring</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item fade-in" id="expMarriottCIAM">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="timeline-card-header">
-              <div>
-                <span class="timeline-client">Marriott – Hospitality (CIAM)</span>
-                <h3 class="timeline-role">Technical Operations Analyst – CIAM</h3>
-              </div>
-              <span class="timeline-date">Aug 2021 – May 2023</span>
-            </div>
-            <div class="timeline-industry-tag">🏨 Hospitality</div>
-            <ul class="timeline-bullets">
-              <li>Led observability stack migration from AppDynamics &amp; Sumo Logic to Dynatrace &amp; Splunk — tested monitoring coverage continuity and ramped team up on new tools.</li>
-              <li>Coordinated endpoint migrations to securely manage customer identities, user registration, and application access.</li>
-              <li>Served as technical point of contact for onboarding new partner integrations with Marriott.com.</li>
-              <li>Provided real-time technical support alongside dev teams during critical deployment windows.</li>
-            </ul>
-            <div class="timeline-tools">
-              <span class="tool-chip">Dynatrace</span>
-              <span class="tool-chip">Splunk</span>
-              <span class="tool-chip">AppDynamics</span>
-              <span class="tool-chip">Sumo Logic</span>
-              <span class="tool-chip">CIAM</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="timeline-item fade-in" id="expMarriottProfile">
-          <div class="timeline-dot"></div>
-          <div class="timeline-card">
-            <div class="timeline-card-header">
-              <div>
-                <span class="timeline-client">Marriott – Hospitality (Profile Services)</span>
-                <h3 class="timeline-role">Technical Operations Analyst – Profile Services</h3>
-              </div>
-              <span class="timeline-date">Jun 2017 – Jul 2021</span>
-            </div>
-            <div class="timeline-industry-tag">🏨 Hospitality</div>
-            <ul class="timeline-bullets">
-              <li>Supported data migration and system integration across legacy platforms during the Marriott, Starwood, and Ritz-Carlton systems merger.</li>
-              <li>Transitioned team from manual status-checking to alert-driven monitoring by redesigning operational workflows and building dashboards for early system degradation detection during high-traffic release windows.</li>
-              <li>Onboarded and trained new resources on application architecture, internal support processes, and monitoring tools.</li>
-            </ul>
-            <div class="timeline-tools">
-              <span class="tool-chip">AppDynamics</span>
-              <span class="tool-chip">Sumo Logic</span>
-              <span class="tool-chip">Data Migration</span>
-              <span class="tool-chip">Training</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════
-       WHAT I'VE BUILT SECTION
-  ═══════════════════════════════════════════════ -->
-  <section class="section" id="built">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-tag">// WHAT_IVE_BUILT</span>
-        <h2 class="section-title">What I've Built</h2>
-        <div class="section-line"></div>
-        <p class="section-subtitle">One shipped side project, plus the ops tooling I built inside client environments — most of it never left their systems.</p>
-      </div>
-      <div class="built-grid">
-
-        <div class="built-card fade-in" id="builtLifeCompass">
-          <div class="built-card-top">
-            <span class="built-status status-live">Live · Solo Project</span>
-            <a href="https://github.com/kavinmanickannan/life-compass" target="_blank" rel="noopener noreferrer" class="built-link" aria-label="View Life Compass on GitHub">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-            </a>
-          </div>
-          <h3 class="built-title">Life Compass</h3>
-          <p class="built-oneliner">A personal "ops dashboard" for life — tasks, open decisions, money, and routines in one place.</p>
-          <p class="built-problem">Built this during my own job search, when I needed the same thing I build for production systems: one place that shows what's on fire, what's stable, and what decision is still open — instead of that living across five apps and my head.</p>
-          <div class="built-tech">
-            <span class="built-tech-tag">React</span>
-            <span class="built-tech-tag">TypeScript</span>
-            <span class="built-tech-tag">TanStack Router</span>
-            <span class="built-tech-tag">Tailwind</span>
-            <span class="built-tech-tag">Cloudflare</span>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════
-       WHAT I'M BUILDING — DAIRYDOC
-  ═══════════════════════════════════════════════ -->
-  <section class="section section-dark" id="building">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-tag">// WHAT_IM_BUILDING</span>
-        <h2 class="section-title">DairyDoc</h2>
-        <div class="section-line"></div>
-        <p class="section-subtitle">A full-stack EMR built for the 3.5 lakh+ dental clinics in India still running on paper, WhatsApp, and memory.</p>
-      </div>
-      <div class="services-grid">
-
-        <div class="service-card fade-in" id="svcProblem">
-          <div class="service-card-glow"></div>
-          <div class="service-icon">🦷</div>
-          <h3 class="service-title">The Problem</h3>
-          <p class="service-label">How it started</p>
-          <p class="service-desc">A dentist friend asked me to help him build something to manage his patients — appointment books, treatment history, billing. I looked at what existed. Nothing fit how an actual clinic works.</p>
-          <p class="service-label">The gap</p>
-          <p class="service-desc">Most dental software is either built for Western markets (wrong pricing, wrong workflow) or is an ancient desktop app that hasn't been updated since 2012. Indian dental clinics are massively underserved.</p>
-        </div>
-
-        <div class="service-card fade-in" id="svcProduct">
-          <div class="service-card-glow"></div>
-          <div class="service-icon">🏗️</div>
-          <h3 class="service-title">What's Built</h3>
-          <p class="service-label">Stack</p>
-          <p class="service-desc">Next.js · Node.js · PostgreSQL · Docker · MinIO — on-premise first, SaaS path built in from day one.</p>
-          <p class="service-label">Scope</p>
-          <p class="service-desc">~100 screens across 18 phases: interactive SVG odontogram, OPD workflow, treatment planning, GST billing, lab order tracking, periodontal charting, X-ray/DICOM viewer, inventory, patient loyalty programme, and ABDM/ABHA integration for India's national health network.</p>
-        </div>
-
-        <div class="service-card fade-in" id="svcLatteHealth">
-          <div class="service-card-glow"></div>
-          <div class="service-icon">🧪</div>
-          <h3 class="service-title">Latte Health</h3>
-          <p class="service-label">Co-Founder</p>
-          <p class="service-desc">Building open-weight models and privacy-preserving tools for the next era of clinical management — interoperable, reliable, and secure by design.</p>
-          <p class="service-label">Why it matters</p>
-          <p class="service-desc">Clinical AI needs open infrastructure. Latte Health is building the primitives that healthcare teams actually own — not locked behind a vendor's API.</p>
-          <a href="https://lattehealth.co.uk" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;color:var(--cyan);font-size:0.85rem;text-decoration:none;font-family:var(--font-mono);">lattehealth.co.uk →</a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════
-       TRACTION SECTION
-  ═══════════════════════════════════════════════ -->
-  <section class="section section-dark" id="traction">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-tag">// TRACTION</span>
-        <h2 class="section-title">What's Been Built</h2>
-        <div class="section-line"></div>
-        <p class="section-subtitle">Real product progress and the production credentials behind it.</p>
-      </div>
-      <div class="traction-grid">
-        <div class="traction-tile fade-in">
-          <span class="traction-num" data-target="100">0</span><span class="traction-unit">+</span>
-          <span class="traction-label">DairyDoc Screens Built</span>
-        </div>
-        <div class="traction-tile fade-in">
-          <span class="traction-num" data-target="18">0</span>
-          <span class="traction-label">Phases Complete — Auth to Loyalty System</span>
-        </div>
-        <div class="traction-tile fade-in">
-          <span class="traction-num" data-target="2">0</span>
-          <span class="traction-label">Companies Founded</span>
-        </div>
-        <div class="traction-tile fade-in">
-          <span class="traction-num" data-target="8">0</span><span class="traction-unit">+</span>
-          <span class="traction-label">Years Building & Running Production Systems</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════
-       CONTACT SECTION
-  ═══════════════════════════════════════════════ -->
-  <section class="section" id="contact">
-    <div class="container">
-      <div class="section-header fade-in">
-        <span class="section-tag">// CONTACT</span>
-        <h2 class="section-title">Let's Connect</h2>
-        <div class="section-line"></div>
-      </div>
-      <div class="contact-grid">
-        <div class="contact-info fade-in">
-          <p class="contact-intro">
-            Building DairyDoc &amp; Co-Founding Latte Health.<br/>Open to clinic pilots, investor conversations, and anyone building at the intersection of healthcare and software in India.
-          </p>
-          <div class="contact-items">
-            <a href="mailto:kavinmanickannan@gmail.com" class="contact-item" id="contactEmail">
-              <div class="contact-item-icon">✉️</div>
-              <div class="contact-item-body">
-                <span class="contact-item-label">Email</span>
-                <span class="contact-item-value">kavinmanickannan@gmail.com</span>
-              </div>
-            </a>
-            <a href="tel:+919944665508" class="contact-item" id="contactPhone">
-              <div class="contact-item-icon">📞</div>
-              <div class="contact-item-body">
-                <span class="contact-item-label">Phone</span>
-                <span class="contact-item-value">+91 99446 65508</span>
-              </div>
-            </a>
-            <a href="https://linkedin.com/in/kavinmanickannan" target="_blank" rel="noopener noreferrer" class="contact-item" id="contactLinkedIn">
-              <div class="contact-item-icon">💼</div>
-              <div class="contact-item-body">
-                <span class="contact-item-label">LinkedIn</span>
-                <span class="contact-item-value">linkedin.com/in/kavinmanickannan</span>
-              </div>
-            </a>
-            <a href="https://github.com/kavinmanickannan" target="_blank" rel="noopener noreferrer" class="contact-item" id="contactGitHub">
-              <div class="contact-item-icon">🐙</div>
-              <div class="contact-item-body">
-                <span class="contact-item-label">GitHub</span>
-                <span class="contact-item-value">github.com/kavinmanickannan</span>
-              </div>
-            </a>
-            <div class="contact-item" id="contactLocation">
-              <div class="contact-item-icon">📍</div>
-              <div class="contact-item-body">
-                <span class="contact-item-label">Location</span>
-                <span class="contact-item-value">Bangalore, India</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="contact-cta-wrap fade-in">
-          <div class="contact-cta-card">
-            <div class="contact-cta-icon">📨</div>
-            <h3 class="contact-cta-title">Let's Build</h3>
-            <p class="contact-cta-desc">
-              If you run a dental clinic, want to pilot DairyDoc, or want to talk about what we're building — I reply within 24 hours.
-            </p>
-            <a href="mailto:kavinmanickannan@gmail.com?subject=DairyDoc%20%2F%20Latte%20Health&body=Hi%20Kavin%2C%0A%0A" class="btn btn-primary btn-full" id="ctaEmailBtn">
-              <span>Get in Touch</span>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════
-       FOOTER
-  ═══════════════════════════════════════════════ -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-logo">
-        <span class="logo-bracket">[</span>KM<span class="logo-bracket">]</span>
-      </div>
-      <p class="footer-copy">
-        <span class="highlight">Kavin Manickannan</span> © <span id="footerYear">2025</span>
-      </p>
-      <div class="footer-links">
-        <a href="#hero">Top</a>
-        <a href="#about">My Story</a>
-        <a href="#built">Built</a>
-        <a href="#building">DairyDoc</a>
-        <a href="#contact">Contact</a>
-        <a href="https://lattehealth.co.uk" target="_blank" rel="noopener noreferrer">Latte Health</a>
-        <a href="https://github.com/kavinmanickannan" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </div>
-    </div>
-  </footer>
-
+  <script src="shaders.js" type="module"></script>
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,353 +1,223 @@
 /* ═══════════════════════════════════════════════════════
-   KAVIN MANICKANNAN — PORTFOLIO JAVASCRIPT
+   KAVIN MANICKANNAN — PORTFOLIO
+   Page behaviour: preferences panel, nav, reveal, counters
 ═══════════════════════════════════════════════════════ */
 
-'use strict';
+(function () {
+  'use strict';
 
-// ──────────────────────────────────────────────────────────
-// CURSOR GLOW
-// ──────────────────────────────────────────────────────────
-const cursorGlow = document.getElementById('cursorGlow');
-document.addEventListener('mousemove', (e) => {
-  cursorGlow.style.left = e.clientX + 'px';
-  cursorGlow.style.top  = e.clientY + 'px';
-});
+  var root = document.documentElement;
+  root.classList.add('js');
 
-// ──────────────────────────────────────────────────────────
-// NAVBAR — SCROLL STATE & HAMBURGER
-// ──────────────────────────────────────────────────────────
-const navbar    = document.getElementById('navbar');
-const hamburger = document.getElementById('hamburger');
-const navLinks  = document.getElementById('navLinks');
+  var DEFAULTS = { theme: 'auto', accent: 'green', effect: 'mesh-gradient', motion: 'on' };
+  var STORAGE_PREFIX = 'km-';
 
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 60);
-});
+  function store(key, value) {
+    try { localStorage.setItem(STORAGE_PREFIX + key, value); } catch (e) {}
+  }
 
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  hamburger.classList.toggle('open');
-});
+  function getPrefs() {
+    return {
+      theme: root.dataset.theme,
+      accent: root.dataset.accent,
+      effect: root.dataset.effect,
+      motion: root.dataset.motion
+    };
+  }
 
-// Close mobile menu when a link is clicked
-navLinks.querySelectorAll('.nav-link').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    hamburger.classList.remove('open');
+  /* ── PREFERENCES ─────────────────────────────────────── */
+  var prefButtons = document.querySelectorAll('[data-pref]');
+
+  function syncPrefButtons() {
+    prefButtons.forEach(function (btn) {
+      var on = root.dataset[btn.dataset.pref] === btn.dataset.value;
+      btn.setAttribute('aria-checked', on ? 'true' : 'false');
+      btn.tabIndex = on ? 0 : -1;
+    });
+  }
+
+  function setPref(key, value) {
+    if (root.dataset[key] === value) return;
+    root.dataset[key] = value;
+    store(key, value);
+    syncPrefButtons();
+    updateThemeColor();
+    document.dispatchEvent(new CustomEvent('prefs:change', { detail: { key: key, prefs: getPrefs() } }));
+  }
+
+  prefButtons.forEach(function (btn) {
+    btn.addEventListener('click', function () { setPref(btn.dataset.pref, btn.dataset.value); });
   });
-});
 
-// ──────────────────────────────────────────────────────────
-// HERO CANVAS — PARTICLE NETWORK
-// ──────────────────────────────────────────────────────────
-const canvas = document.getElementById('heroCanvas');
-const ctx    = canvas.getContext('2d');
+  // Arrow keys move within each radio group
+  document.querySelectorAll('[role="radiogroup"]').forEach(function (group) {
+    group.addEventListener('keydown', function (e) {
+      var keys = ['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp'];
+      if (keys.indexOf(e.key) < 0) return;
+      e.preventDefault();
+      var items = Array.prototype.slice.call(group.querySelectorAll('[role="radio"]'));
+      var i = items.indexOf(document.activeElement);
+      var step = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : -1;
+      var next = items[(i + step + items.length) % items.length];
+      next.focus();
+      next.click();
+    });
+  });
 
-let particles = [];
-const PARTICLE_COUNT = 80;
-const MAX_DIST       = 140;
+  document.getElementById('prefReset').addEventListener('click', function () {
+    Object.keys(DEFAULTS).forEach(function (k) { setPref(k, DEFAULTS[k]); });
+  });
 
-function resize() {
-  canvas.width  = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-
-class Particle {
-  constructor() { this.reset(true); }
-
-  reset(init = false) {
-    this.x  = Math.random() * canvas.width;
-    this.y  = init ? Math.random() * canvas.height : canvas.height + 10;
-    this.vx = (Math.random() - 0.5) * 0.4;
-    this.vy = -(Math.random() * 0.4 + 0.1);
-    this.radius = Math.random() * 2 + 0.5;
-    this.opacity = Math.random() * 0.5 + 0.2;
-    this.color = Math.random() > 0.5 ? '0,212,255' : '124,58,237';
+  // Browser chrome colour follows the resolved theme
+  var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  function updateThemeColor() {
+    var dark = root.dataset.theme === 'dark' || (root.dataset.theme === 'auto' && darkQuery.matches);
+    document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) {
+      m.setAttribute('content', dark ? '#111412' : '#f4f3ef');
+    });
   }
-
-  update() {
-    this.x += this.vx;
-    this.y += this.vy;
-    if (this.y < -10 || this.x < -10 || this.x > canvas.width + 10) {
-      this.reset();
+  darkQuery.addEventListener('change', function () {
+    updateThemeColor();
+    if (root.dataset.theme === 'auto') {
+      document.dispatchEvent(new CustomEvent('prefs:change', { detail: { key: 'theme', prefs: getPrefs() } }));
     }
+  });
+
+  syncPrefButtons();
+  updateThemeColor();
+
+  /* ── PERSONALISE PANEL ───────────────────────────────── */
+  var panel = document.getElementById('personalise');
+  var scrim = document.getElementById('scrim');
+  var openBtn = document.getElementById('personaliseBtn');
+  var closeBtn = document.getElementById('personaliseClose');
+  var lastFocus = null;
+
+  function openPanel() {
+    lastFocus = document.activeElement;
+    panel.hidden = false;
+    scrim.hidden = false;
+    requestAnimationFrame(function () {
+      panel.classList.add('is-open');
+      scrim.classList.add('is-open');
+    });
+    document.body.classList.add('panel-open');
+    openBtn.setAttribute('aria-expanded', 'true');
+    var current = panel.querySelector('[aria-checked="true"]');
+    (current || closeBtn).focus();
+    document.dispatchEvent(new CustomEvent('personalise:open'));
   }
 
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(${this.color},${this.opacity})`;
-    ctx.fill();
+  function closePanel() {
+    panel.classList.remove('is-open');
+    scrim.classList.remove('is-open');
+    document.body.classList.remove('panel-open');
+    openBtn.setAttribute('aria-expanded', 'false');
+    setTimeout(function () { panel.hidden = true; scrim.hidden = true; }, 250);
+    document.dispatchEvent(new CustomEvent('personalise:close'));
+    if (lastFocus) lastFocus.focus();
   }
-}
 
-function initParticles() {
-  particles = [];
-  for (let i = 0; i < PARTICLE_COUNT; i++) {
-    particles.push(new Particle());
+  openBtn.setAttribute('aria-expanded', 'false');
+  openBtn.addEventListener('click', openPanel);
+  closeBtn.addEventListener('click', closePanel);
+  scrim.addEventListener('click', closePanel);
+
+  document.addEventListener('keydown', function (e) {
+    if (panel.hidden) return;
+    if (e.key === 'Escape') { closePanel(); return; }
+    if (e.key !== 'Tab') return;
+    // Keep focus inside the panel while it is open
+    var focusable = Array.prototype.filter.call(
+      panel.querySelectorAll('button'),
+      function (el) { return el.tabIndex !== -1; }
+    );
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  /* ── MOBILE MENU ─────────────────────────────────────── */
+  var sidebar = document.getElementById('sidebar');
+  var menuToggle = document.getElementById('menuToggle');
+  var menuLabel = menuToggle.querySelector('.menu-toggle-label');
+
+  function setMenu(open) {
+    sidebar.classList.toggle('is-open', open);
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuLabel.textContent = open ? 'Close' : 'Menu';
   }
-}
+  menuToggle.addEventListener('click', function () {
+    setMenu(!sidebar.classList.contains('is-open'));
+  });
+  sidebar.querySelectorAll('.side-link, .brand').forEach(function (a) {
+    a.addEventListener('click', function () { setMenu(false); });
+  });
 
-function drawGrid() {
-  const gridSize = 60;
-  ctx.strokeStyle = 'rgba(0,212,255,0.04)';
-  ctx.lineWidth = 1;
+  /* ── ACTIVE NAV LINK ─────────────────────────────────── */
+  var links = document.querySelectorAll('.side-link');
+  var sections = Array.prototype.map.call(links, function (a) {
+    return document.querySelector(a.getAttribute('href'));
+  });
 
-  for (let x = 0; x < canvas.width; x += gridSize) {
-    ctx.beginPath();
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, canvas.height);
-    ctx.stroke();
+  function updateActive() {
+    var y = window.innerHeight * 0.35;
+    var active = -1;
+    sections.forEach(function (s, i) {
+      if (s && s.getBoundingClientRect().top <= y) active = i;
+    });
+    links.forEach(function (a, i) { a.classList.toggle('is-active', i === active); });
   }
-  for (let y = 0; y < canvas.height; y += gridSize) {
-    ctx.beginPath();
-    ctx.moveTo(0, y);
-    ctx.lineTo(canvas.width, y);
-    ctx.stroke();
-  }
-}
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
 
-function connectParticles() {
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i + 1; j < particles.length; j++) {
-      const dx   = particles[i].x - particles[j].x;
-      const dy   = particles[i].y - particles[j].y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < MAX_DIST) {
-        const alpha = (1 - dist / MAX_DIST) * 0.3;
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(0,212,255,${alpha})`;
-        ctx.lineWidth = 0.5;
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.stroke();
-      }
-    }
-  }
-}
-
-function drawHorizonGlow() {
-  const grad = ctx.createRadialGradient(
-    canvas.width / 2, canvas.height / 2, 0,
-    canvas.width / 2, canvas.height / 2, canvas.width * 0.6
-  );
-  grad.addColorStop(0,   'rgba(0,212,255,0.04)');
-  grad.addColorStop(0.5, 'rgba(124,58,237,0.02)');
-  grad.addColorStop(1,   'transparent');
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-}
-
-let animFrame;
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawGrid();
-  drawHorizonGlow();
-  particles.forEach(p => { p.update(); p.draw(); });
-  connectParticles();
-  animFrame = requestAnimationFrame(animate);
-}
-
-resize();
-initParticles();
-animate();
-
-window.addEventListener('resize', () => {
-  resize();
-  initParticles();
-});
-
-// ──────────────────────────────────────────────────────────
-// TYPING ANIMATION
-// ──────────────────────────────────────────────────────────
-const roles = [
-  'Building DairyDoc — EMR for Indian Dental Clinics',
-  'Co-Founder at Latte Health',
-  'Shipping Healthcare Software That Actually Works',
-  '3.5 Lakh+ Clinics. Still Running On Paper.',
-  'From Dentist Friend to Full-Stack EMR',
-];
-
-const typingEl = document.getElementById('heroTyping');
-let roleIndex   = 0;
-let charIndex   = 0;
-let isDeleting  = false;
-let typingTimer;
-
-function typeRole() {
-  const currentRole = roles[roleIndex];
-  if (isDeleting) {
-    typingEl.textContent = currentRole.substring(0, charIndex - 1);
-    charIndex--;
+  /* ── REVEAL ON SCROLL ────────────────────────────────── */
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    reveals.forEach(function (el) { io.observe(el); });
   } else {
-    typingEl.textContent = currentRole.substring(0, charIndex + 1);
-    charIndex++;
+    reveals.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  let delay = isDeleting ? 50 : 90;
+  /* ── COUNTERS ────────────────────────────────────────── */
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var counters = document.querySelectorAll('.count[data-target]');
 
-  if (!isDeleting && charIndex === currentRole.length) {
-    delay = 2200;
-    isDeleting = true;
-  } else if (isDeleting && charIndex === 0) {
-    isDeleting = false;
-    roleIndex = (roleIndex + 1) % roles.length;
-    delay = 400;
+  function runCounter(el) {
+    var target = parseInt(el.dataset.target, 10);
+    var start = null;
+    var duration = 1200;
+    function tick(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * eased);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
   }
 
-  typingTimer = setTimeout(typeRole, delay);
-}
-
-typingTimer = setTimeout(typeRole, 800);
-
-// ──────────────────────────────────────────────────────────
-// ANIMATED STAT COUNTERS
-// ──────────────────────────────────────────────────────────
-function animateCounter(el) {
-  const target = parseInt(el.getAttribute('data-target'), 10);
-  if (target === 0) { el.textContent = '0'; return; }
-  const duration = 1800;
-  const start = performance.now();
-
-  function step(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-    el.textContent = Math.floor(eased * target);
-    if (progress < 1) requestAnimationFrame(step);
-    else el.textContent = String(target);
+  if (!reduceMotion && root.dataset.motion === 'on' && 'IntersectionObserver' in window) {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          runCounter(entry.target);
+          cio.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(function (el) { el.textContent = '0'; cio.observe(el); });
   }
 
-  requestAnimationFrame(step);
-}
-
-// ──────────────────────────────────────────────────────────
-// INTERSECTION OBSERVER — FADE-IN + COUNTERS
-// ──────────────────────────────────────────────────────────
-const faderObs = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      faderObs.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.fade-in').forEach((el, i) => {
-  el.style.transitionDelay = `${(i % 4) * 80}ms`;
-  faderObs.observe(el);
-});
-
-const statNums  = document.querySelectorAll('.stat-num[data-target]');
-let countersRun = false;
-const heroObs   = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting && !countersRun) {
-      countersRun = true;
-      statNums.forEach(el => animateCounter(el));
-    }
-  });
-}, { threshold: 0.5 });
-
-const heroStats = document.querySelector('.hero-stats');
-if (heroStats) heroObs.observe(heroStats);
-
-const tractionNums = document.querySelectorAll('.traction-num[data-target]');
-let tractionCountersRun = false;
-const tractionObs = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting && !tractionCountersRun) {
-      tractionCountersRun = true;
-      tractionNums.forEach(el => animateCounter(el));
-    }
-  });
-}, { threshold: 0.3 });
-
-const tractionGrid = document.querySelector('.traction-grid');
-if (tractionGrid) tractionObs.observe(tractionGrid);
-
-// ──────────────────────────────────────────────────────────
-// ACTIVE NAV LINK — SCROLL SPY
-// ──────────────────────────────────────────────────────────
-const sections  = document.querySelectorAll('section[id]');
-const navAnchors = document.querySelectorAll('.nav-link');
-
-const spyObs = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      navAnchors.forEach(a => a.classList.remove('active'));
-      const active = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
-      if (active) active.classList.add('active');
-    }
-  });
-}, { rootMargin: '-40% 0px -55% 0px' });
-
-sections.forEach(s => spyObs.observe(s));
-
-// Active nav link style (injected dynamically)
-const navStyle = document.createElement('style');
-navStyle.textContent = `.nav-link.active { color: var(--cyan); background: var(--cyan-dim); }`;
-document.head.appendChild(navStyle);
-
-// ──────────────────────────────────────────────────────────
-// FOOTER YEAR
-// ──────────────────────────────────────────────────────────
-const footerYear = document.getElementById('footerYear');
-if (footerYear) footerYear.textContent = new Date().getFullYear();
-
-// ──────────────────────────────────────────────────────────
-// SKILL TAG HOVER PARTICLES (micro-interaction)
-// ──────────────────────────────────────────────────────────
-document.querySelectorAll('.skill-tag').forEach(tag => {
-  tag.addEventListener('mouseenter', function () {
-    this.style.boxShadow = '0 0 16px rgba(0,212,255,0.35)';
-  });
-  tag.addEventListener('mouseleave', function () {
-    this.style.boxShadow = '';
-  });
-});
-
-// ──────────────────────────────────────────────────────────
-// SERVICE CARD MOUSE-TRACK GLOW
-// ──────────────────────────────────────────────────────────
-document.querySelectorAll('.service-card').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top)  / rect.height) * 100;
-    card.querySelector('.service-card-glow').style.background =
-      `radial-gradient(circle at ${x}% ${y}%, rgba(0,212,255,0.12), transparent 60%)`;
-  });
-});
-
-// ──────────────────────────────────────────────────────────
-// TIMELINE CARD ENTRANCE DELAY STAGGER
-// ──────────────────────────────────────────────────────────
-document.querySelectorAll('.timeline-item').forEach((item, i) => {
-  item.style.transitionDelay = `${i * 100}ms`;
-});
-
-// ──────────────────────────────────────────────────────────
-// GLITCH INTENSITY ON HOVER (hero name)
-// ──────────────────────────────────────────────────────────
-document.querySelectorAll('.glitch').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    el.style.animation = 'none';
-    el.style.textShadow = `0 0 20px rgba(0,212,255,0.8)`;
-  });
-  el.addEventListener('mouseleave', () => {
-    el.style.textShadow = '';
-  });
-});
-
-// ──────────────────────────────────────────────────────────
-// SMOOTH REVEAL: logo bracket color pulse
-// ──────────────────────────────────────────────────────────
-let bracketHue = 260;
-const brackets = document.querySelectorAll('.logo-bracket');
-setInterval(() => {
-  bracketHue = (bracketHue + 1) % 360;
-  brackets.forEach(b => {
-    b.style.color = `hsl(${bracketHue}, 80%, 65%)`;
-  });
-}, 30);
+  /* ── FOOTER YEAR ─────────────────────────────────────── */
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+})();
