@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════
    KAVIN MANICKANNAN — PORTFOLIO
-   Page behaviour: preferences panel, nav, reveal, counters
+   Page behaviour: preferences, panel, nav, reveal, counters
 ═══════════════════════════════════════════════════════ */
 
 (function () {
@@ -9,20 +9,27 @@
   var root = document.documentElement;
   root.classList.add('js');
 
-  var DEFAULTS = { theme: 'auto', accent: 'green', effect: 'mesh-gradient', motion: 'on' };
-  var STORAGE_PREFIX = 'km-';
+  // Allowed values come from the inline script in <head>; the first value of each is the default
+  var PREFS = window.KM_PREFS;
+  var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
   function store(key, value) {
-    try { localStorage.setItem(STORAGE_PREFIX + key, value); } catch (e) {}
+    try { localStorage.setItem('km-' + key, value); } catch (e) {}
   }
 
-  function getPrefs() {
-    return {
-      theme: root.dataset.theme,
-      accent: root.dataset.accent,
-      effect: root.dataset.effect,
-      motion: root.dataset.motion
-    };
+  function resolveMode() {
+    var theme = root.dataset.theme;
+    root.dataset.mode = theme === 'auto' ? (darkQuery.matches ? 'dark' : 'light') : theme;
+  }
+
+  function updateThemeColor() {
+    var bg = getComputedStyle(root).getPropertyValue('--bg').trim();
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta && bg) meta.setAttribute('content', bg);
+  }
+
+  function announce(key) {
+    document.dispatchEvent(new CustomEvent('prefs:change', { detail: { key: key } }));
   }
 
   /* ── PREFERENCES ─────────────────────────────────────── */
@@ -37,12 +44,13 @@
   }
 
   function setPref(key, value) {
-    if (root.dataset[key] === value) return;
+    if (PREFS[key].indexOf(value) < 0 || root.dataset[key] === value) return;
     root.dataset[key] = value;
     store(key, value);
+    if (key === 'theme') resolveMode();
     syncPrefButtons();
     updateThemeColor();
-    document.dispatchEvent(new CustomEvent('prefs:change', { detail: { key: key, prefs: getPrefs() } }));
+    announce(key);
   }
 
   prefButtons.forEach(function (btn) {
@@ -65,22 +73,19 @@
   });
 
   document.getElementById('prefReset').addEventListener('click', function () {
-    Object.keys(DEFAULTS).forEach(function (k) { setPref(k, DEFAULTS[k]); });
+    Object.keys(PREFS).forEach(function (k) { setPref(k, PREFS[k][0]); });
   });
 
-  // Browser chrome colour follows the resolved theme
-  var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-  function updateThemeColor() {
-    var dark = root.dataset.theme === 'dark' || (root.dataset.theme === 'auto' && darkQuery.matches);
-    document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) {
-      m.setAttribute('content', dark ? '#111412' : '#f4f3ef');
-    });
-  }
+  // Quick light/dark toggle in the top bar
+  document.getElementById('modeBtn').addEventListener('click', function () {
+    setPref('theme', root.dataset.mode === 'dark' ? 'light' : 'dark');
+  });
+
   darkQuery.addEventListener('change', function () {
+    if (root.dataset.theme !== 'auto') return;
+    resolveMode();
     updateThemeColor();
-    if (root.dataset.theme === 'auto') {
-      document.dispatchEvent(new CustomEvent('prefs:change', { detail: { key: 'theme', prefs: getPrefs() } }));
-    }
+    announce('theme');
   });
 
   syncPrefButtons();
@@ -103,8 +108,7 @@
     });
     document.body.classList.add('panel-open');
     openBtn.setAttribute('aria-expanded', 'true');
-    var current = panel.querySelector('[aria-checked="true"]');
-    (current || closeBtn).focus();
+    closeBtn.focus();
     document.dispatchEvent(new CustomEvent('personalise:open'));
   }
 
@@ -139,24 +143,23 @@
   });
 
   /* ── MOBILE MENU ─────────────────────────────────────── */
-  var sidebar = document.getElementById('sidebar');
+  var topbar = document.getElementById('topbar');
   var menuToggle = document.getElementById('menuToggle');
-  var menuLabel = menuToggle.querySelector('.menu-toggle-label');
 
   function setMenu(open) {
-    sidebar.classList.toggle('is-open', open);
+    topbar.classList.toggle('is-open', open);
     menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    menuLabel.textContent = open ? 'Close' : 'Menu';
+    menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   }
   menuToggle.addEventListener('click', function () {
-    setMenu(!sidebar.classList.contains('is-open'));
+    setMenu(!topbar.classList.contains('is-open'));
   });
-  sidebar.querySelectorAll('.side-link, .brand').forEach(function (a) {
+  topbar.querySelectorAll('.nav-link, .brand').forEach(function (a) {
     a.addEventListener('click', function () { setMenu(false); });
   });
 
   /* ── ACTIVE NAV LINK ─────────────────────────────────── */
-  var links = document.querySelectorAll('.side-link');
+  var links = document.querySelectorAll('.nav-link');
   var sections = Array.prototype.map.call(links, function (a) {
     return document.querySelector(a.getAttribute('href'));
   });
@@ -190,17 +193,14 @@
 
   /* ── COUNTERS ────────────────────────────────────────── */
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var counters = document.querySelectorAll('.count[data-target]');
 
   function runCounter(el) {
     var target = parseInt(el.dataset.target, 10);
     var start = null;
-    var duration = 1200;
     function tick(ts) {
       if (!start) start = ts;
-      var p = Math.min((ts - start) / duration, 1);
-      var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased);
+      var p = Math.min((ts - start) / 1200, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
       if (p < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
@@ -215,8 +215,44 @@
         }
       });
     }, { threshold: 0.6 });
-    counters.forEach(function (el) { el.textContent = '0'; cio.observe(el); });
+    document.querySelectorAll('.count[data-target]').forEach(function (el) { cio.observe(el); });
   }
+
+  /* ── LOCAL TIME IN BANGALORE ─────────────────────────── */
+  var timeEl = document.getElementById('localTime');
+  function updateTime() {
+    try {
+      timeEl.textContent = new Intl.DateTimeFormat('en-IN', {
+        hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'Asia/Kolkata'
+      }).format(new Date());
+    } catch (e) {
+      timeEl.textContent = 'IST';
+    }
+  }
+  updateTime();
+  setInterval(updateTime, 30000);
+
+  /* ── COPY EMAIL ──────────────────────────────────────── */
+  var toast = document.getElementById('toast');
+  var toastTimer = null;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('is-visible'); }, 2200);
+  }
+
+  var copyBtn = document.getElementById('copyEmail');
+  copyBtn.addEventListener('click', function () {
+    var email = copyBtn.dataset.email;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email)
+        .then(function () { showToast('Email copied: ' + email); })
+        .catch(function () { showToast(email); });
+    } else {
+      showToast(email);
+    }
+  });
 
   /* ── FOOTER YEAR ─────────────────────────────────────── */
   document.getElementById('footerYear').textContent = new Date().getFullYear();

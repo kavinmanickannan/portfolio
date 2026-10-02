@@ -1,23 +1,23 @@
 /* ═══════════════════════════════════════════════════════
    KAVIN MANICKANNAN — PORTFOLIO
-   Hero background effects, powered by Paper Shaders
+   Full-page background effects, powered by Paper Shaders
    (https://github.com/paper-design/shaders, Apache-2.0)
 
    If the library can't load or WebGL is unavailable, the
-   CSS gradient in .hero-fallback stays visible instead.
+   CSS gradient in .bg-fallback stays visible instead.
 ═══════════════════════════════════════════════════════ */
 
 const SHADERS_URL = 'https://cdn.jsdelivr.net/npm/@paper-design/shaders@0.0.81/dist/index.js';
 
 const root = document.documentElement;
-const heroEl = document.getElementById('heroVisual');
+const bgEl = document.getElementById('bgEffect');
 const reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 const isSmallScreen = window.matchMedia('(max-width: 640px)').matches;
 
 let lib = null;
 let noiseTexture = null;
-let heroMount = null;
-let heroEffect = null;
+let bgMount = null;
+let bgEffect = null;
 const previewMounts = new Map();
 
 /* ── HELPERS ───────────────────────────────────────────── */
@@ -195,31 +195,47 @@ function mount(el, effect, { speed, frame = 0, minPixelRatio = 2, maxPixelCount 
   );
 }
 
-function heroSpeed(effect) {
+// ShaderMount.dispose() frees the shader but leaves the WebGL context alive,
+// and browsers cap live contexts at ~16, so release it explicitly
+function release(m) {
+  if (!m) return;
+  const gl = m.gl;
+  m.dispose();
+  gl?.getExtension('WEBGL_lose_context')?.loseContext();
+}
+
+function bgSpeed(effect) {
   return motionEnabled() ? build(effect).speed : 0;
 }
 
-function renderHero() {
+function renderBackground() {
   const effect = root.dataset.effect;
   try {
-    // A different effect needs a new shader program; same effect only needs new colours/speed
-    if (heroMount && heroEffect === effect) {
-      heroMount.setUniforms(build(effect).uniforms);
-      heroMount.setSpeed(heroSpeed(effect));
+    if (effect === 'none') {
+      release(bgMount);
+      bgMount = null;
+      bgEffect = null;
       return;
     }
-    heroMount?.dispose();
-    heroMount = mount(heroEl, effect, {
-      speed: heroSpeed(effect),
+    // A different effect needs a new shader program; same effect only needs new colours/speed
+    if (bgMount && bgEffect === effect) {
+      bgMount.setUniforms(build(effect).uniforms);
+      bgMount.setSpeed(bgSpeed(effect));
+      return;
+    }
+    release(bgMount);
+    // The canvas covers the whole viewport, so cap its resolution to keep it light
+    bgMount = mount(bgEl, effect, {
+      speed: bgSpeed(effect),
       frame: 8000,
-      minPixelRatio: isSmallScreen ? 1 : 2,
-      maxPixelCount: isSmallScreen ? 1280 * 720 : 1920 * 1080 * 2,
+      minPixelRatio: 1,
+      maxPixelCount: isSmallScreen ? 900 * 600 : 1600 * 1000,
     });
-    heroEffect = effect;
+    bgEffect = effect;
   } catch (err) {
-    console.warn('Hero effect unavailable, using CSS fallback.', err);
-    heroMount = null;
-    heroEffect = null;
+    console.warn('Background effect unavailable, using CSS fallback.', err);
+    bgMount = null;
+    bgEffect = null;
   }
 }
 
@@ -241,7 +257,7 @@ function renderPreviews() {
 }
 
 function disposePreviews() {
-  previewMounts.forEach((m) => m.dispose());
+  previewMounts.forEach(release);
   previewMounts.clear();
 }
 
@@ -258,14 +274,14 @@ async function init() {
   noiseTexture = lib.getShaderNoiseTexture();
   try { await noiseTexture.decode(); } catch (e) { /* fall through; shaders still render */ }
 
-  renderHero();
+  renderBackground();
 
   let previewsOpen = false;
 
   document.addEventListener('prefs:change', () => {
     // Wait a frame so the new CSS variables have been applied
     requestAnimationFrame(() => {
-      renderHero();
+      renderBackground();
       if (previewsOpen) renderPreviews();
     });
   });
@@ -281,7 +297,7 @@ async function init() {
     setTimeout(() => { if (!previewsOpen) disposePreviews(); }, 300);
   });
 
-  reduceMotionQuery.addEventListener('change', () => renderHero());
+  reduceMotionQuery.addEventListener('change', () => renderBackground());
 }
 
 init();
